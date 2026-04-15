@@ -7,6 +7,12 @@ use App\Models\Pizza;
 
 class PizzaController extends Controller
 {
+    public function admin()
+{
+    $pizzas = Pizza::all();
+
+    return view('admin.pizzas', compact('pizzas'));
+}
     /**
      * Toon alle pizzas (menu pagina)
      */

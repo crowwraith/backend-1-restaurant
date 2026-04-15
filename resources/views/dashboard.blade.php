@@ -11,6 +11,12 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
+                <div class="mt-6">
+    <a href="{{ route('admin.messages') }}"
+       class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+        📩 Berichten bekijken
+    </a>
+</div>
             </div>
         </div>
     </div>

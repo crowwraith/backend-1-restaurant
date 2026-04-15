@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\Route;
 | Public routes
 |--------------------------------------------------------------------------
 */
-
+Route::get('/', function () {
+    return view('welcome');
+});
 // Home → pizzas index
-Route::get('/', [PizzaController::class, 'index']);
+// Route::get('/', [PizzaController::class, 'index']);
 
 // Test route
 Route::get('/test', function () {
     return view('test');
 });
 
-// Extra public pizzas route (optioneel)
+Route::get('/contact', [ContactController::class, 'create']);
+Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/pizzas', [PizzaController::class, 'index']);
 
 /*
@@ -59,5 +62,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pizzas/{pizza}', [PizzaController::class, 'destroy']);
 
     // Admin panel
-    Route::get('/admin/pizzas', [PizzaController::class, 'admin']);
+   Route::get('/admin/pizzas', [PizzaController::class, 'admin'])
+    ->name('admin.pizzas');
+    Route::get('/admin/messages', [ContactController::class, 'index'])
+    ->middleware('auth')
+    ->name('admin.messages');
 });
